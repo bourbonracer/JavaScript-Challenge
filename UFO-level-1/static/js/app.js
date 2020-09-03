@@ -13,3 +13,9 @@ tableData.forEach((ufoSighting) => {
     });
 });
 
+// SELECT THE FORM AND BUTTON
+var form = d3.select("form");
+var button = d3.select("#filter-btn");
+
+
+}
