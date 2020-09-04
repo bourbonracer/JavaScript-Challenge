@@ -22,20 +22,22 @@ var button = d3.select("#filter-btn");
 button.on("click", runEnter);
 form.on("submit", runEnter);
 
-//FUNCTION TO RUN BOTH EVENTS
+//FUNCTION TO RUN BOTH EVENTS WITH FILTERS FOR DATE, CITY, STATE, COUNTRY AND SHAPE
 function runEnter() {
     d3.event.preventDefault();
     var inputDate = d3.select("#datetime");
     var inputCity = d3.select("#city");
     var inputState = d3.select("#state");
+    var inputCountry = d3.select("#country");
     var dateValue = inputDate.property("value");
     var cityValue = inputCity.property("value");
     var stateValue = inputState.property("value");
-
+    var countryValue = inputCountry.property("value");
     tbody.html("");
     var filteredDate = tableData.filter(dateData => dateData.datetime === dateValue);
     var filteredCity = tableData.filter(cityData => cityData.city === cityValue);
     var filteredState = tableData.filter(stateData => stateData.state === stateValue);
+    var filteredCountry = tableData.filter(countryData => countryData.country === countryValue);
     filteredDate.forEach((FilterDate) => {
         var row = tbody.append("tr");
         Object.entries(FilterDate).forEach(function([key, value]) {
@@ -53,6 +55,13 @@ function runEnter() {
     filteredState.forEach((FilterState) => {
         var row = tbody.append("tr");
         Object.entries(FilterState).forEach(function([key, value]) {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+    filteredCountry.forEach((FilterCountry) => {
+        var row = tbody.append("tr");
+        Object.entries(FilterCountry).forEach(function([key, value]) {
             var cell = row.append("td");
             cell.text(value);
         });
