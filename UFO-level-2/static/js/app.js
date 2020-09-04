@@ -27,11 +27,15 @@ function runEnter() {
     d3.event.preventDefault();
     var inputDate = d3.select("#datetime");
     var inputCity = d3.select("#city");
+    var inputState = d3.select("#state");
     var dateValue = inputDate.property("value");
     var cityValue = inputCity.property("value");
+    var stateValue = inputState.property("value");
+
     tbody.html("");
     var filteredDate = tableData.filter(dateData => dateData.datetime === dateValue);
     var filteredCity = tableData.filter(cityData => cityData.city === cityValue);
+    var filteredState = tableData.filter(stateData => stateData.state === stateValue);
     filteredDate.forEach((FilterDate) => {
         var row = tbody.append("tr");
         Object.entries(FilterDate).forEach(function([key, value]) {
@@ -42,6 +46,13 @@ function runEnter() {
     filteredCity.forEach((FilterCity) => {
         var row = tbody.append("tr");
         Object.entries(FilterCity).forEach(function([key, value]) {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+    filteredState.forEach((FilterState) => {
+        var row = tbody.append("tr");
+        Object.entries(FilterState).forEach(function([key, value]) {
             var cell = row.append("td");
             cell.text(value);
         });
