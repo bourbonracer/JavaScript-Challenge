@@ -19,16 +19,19 @@ var form = d3.select("#form");
 var button = d3.select("#filter-btn");
 
 // HANDLERS FOR CLICKING BUTTON OR PRESSING ENTER KEY
-button.on("click", runEnter, runCity);
-form.on("submit", runEnter, runCity);
+button.on("click", runEnter);
+form.on("submit", runEnter);
 
 //FUNCTION TO RUN BOTH EVENTS
 function runEnter() {
     d3.event.preventDefault();
     var inputDate = d3.select("#datetime");
+    var inputCity = d3.select("#city");
     var dateValue = inputDate.property("value");
+    var cityValue = inputCity.property("value");
     tbody.html("");
     var filteredDate = tableData.filter(dateData => dateData.datetime === dateValue);
+    var filteredCity = tableData.filter(cityData => cityData.city === cityValue);
     filteredDate.forEach((FilterDate) => {
         var row = tbody.append("tr");
         Object.entries(FilterDate).forEach(function([key, value]) {
@@ -36,14 +39,6 @@ function runEnter() {
             cell.text(value);
         });
     });
-};
-
-function runCity() {
-    d3.event.preventDefault();
-    var inputCity = d3.select("#city");
-    var cityValue = inputCity.property("value");
-    tbody.html("");
-    var filteredCity = tableData.filter(cityData => cityData.city === cityValue);
     filteredCity.forEach((FilterCity) => {
         var row = tbody.append("tr");
         Object.entries(FilterCity).forEach(function([key, value]) {
@@ -52,6 +47,21 @@ function runCity() {
         });
     });
 };
+
+// function runCity() {
+//     d3.event.preventDefault();
+//     var inputCity = d3.select("#city");
+//     var cityValue = inputCity.property("value");
+//     tbody.html("");
+//     var filteredCity = tableData.filter(cityData => cityData.city === cityValue);
+//     filteredCity.forEach((FilterCity) => {
+//         var row = tbody.append("tr");
+//         Object.entries(FilterCity).forEach(function([key, value]) {
+//             var cell = row.append("td");
+//             cell.text(value);
+//         });
+//     });
+// };
 
 //     d3.event.preventDefault();
 //     var inputState = d3.select("#state");
