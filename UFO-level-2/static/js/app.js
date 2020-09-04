@@ -19,8 +19,8 @@ var form = d3.select("#form");
 var button = d3.select("#filter-btn");
 
 // HANDLERS FOR CLICKING BUTTON OR PRESSING ENTER KEY
-button.on("click", runEnter);
-form.on("submit", runEnter);
+button.on("click", runEnter, runCity);
+form.on("submit", runEnter, runCity);
 
 //FUNCTION TO RUN BOTH EVENTS
 function runEnter() {
